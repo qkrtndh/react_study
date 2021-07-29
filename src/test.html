@@ -60,6 +60,27 @@
         const b5 = a5.map((n) => n + 10);
         console.log(`a5의 값은:${a5}`);
         console.log(`b5의 값은:${b5}`);
+
+        console.log("6. ============== 수정하기");
+        const data = { phone: "1111" }
+        const a6 = { id: 1, name: "미야앙", phone: "1234" };
+        const b6 = { ...a6, ...data, name: "꾸아아" };
+        console.log(a6);
+        console.log(b6);
+
+
+        const users = [
+            { id: 1, name: "미야앙", phone: "1111" },
+            { id: 2, name: "와아앙", phone: "2222" },
+            { id: 3, name: "끼야앙", phone: "3333" }
+        ];
+
+        const upadatUserDto = { id: 2, name: "홍길동" };
+
+        const newUsers = users.map(u => u.id === upadatUserDto.id ? { ...u, ...upadatUserDto } : u);
+        console.log("newUsers:", newUsers);
+        //users[1].name = updateDto.name 라고 하면 dto의 내용이 연결되어 수정될 수 있음
+
     </script>
 </body>
 
