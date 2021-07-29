@@ -7,6 +7,9 @@ const mystyle = {
   color: 'red',
 };
 function App() {
+  //리스트만 관리하면 된다.
+  let list = [1, 2, 3];
+
   //JSX 문법
   //리턴시 하나의 태그(DOM)만 리턴할 수 있다.
   //변수 선언은 let,const 만 가능하다.
@@ -20,6 +23,11 @@ function App() {
       <div style={mystyle}>안녕1 {a === 10 ? '맞다' : '아니다'}</div>
       <hr />
       <h1 className="box-style">header {b === 30 && '20이다.'}</h1>
+      <div>
+        {list.map((n) => (
+          <h1>{n}</h1>
+        ))}
+      </div>
     </div>
   );
 }

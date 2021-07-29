@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>test</title>
+</head>
+
+<body>
+    <script>
+        //배열종류 중 4가지. concat, filter, map, slice 그리고 스프레드(전개) 연산자
+
+        console.log("1. ============= 스프레드 연산자");
+        const a = [1, 2, 3];
+        const aa = a; //얕은 복사
+        const b = [...a]; //깊은복사 == b = [1,2,3] 즉, 같은 값을 가지는 다른 저장공간.
+        b.push(4);
+        console.log(`a의 값은:${a}`)//1,2,3
+        console.log(`b의 값은:${b}`)//1,2,3,4
+
+
+
+
+        console.log("2. ============== 추가하기");
+        const a2 = [1, 2, 3];
+        //b2에 새로운 공간으로 a2에 4가 추가된 값이 들어옴
+        const b2 = a2.concat(4);
+        console.log(`a의 값은:${a2}`)//1,2,3
+        console.log(`b의 값은:${b2}`)//1,2,3,4
+        const c2 = [0, ...a, 4];//concat 과 같다
+        console.log(`c2의 값은:${c2}`)//0,1,2,3,4
+
+
+        console.log("3. ============== 걸러내기");//삭제하기 할때 주로 쓴다
+        const a3 = [1, 2, 3];
+        //n에 1,2,3이 순서대로 들어온다. filter는 boolean을 return 한다.
+        //즉 true 요소만 걸러낼 때 사용
+        const b3 = a3.filter((n) => {
+            return n != 1;
+        });
+        console.log(`a3의 값은:${a3}`)//1,2,3
+        console.log(`b3의 값은:${b3}`)//2,3
+
+        console.log("4. ============== 잘라내기");
+        const a4 = [1, 2, 3];
+        const b4 = a4.slice(0, 2);
+        console.log(`a4의 값은:${a4}`)//1,2,3
+        console.log(`b4의 값은:${b4}`)//1,2
+        const c4 = [...a4.slice(0, 2), 4, ...a4.slice(2, 3)];
+        console.log(`c4의 값은:${c4}`);
+
+
+
+        console.log("5. ============== 반복하기");
+        const a5 = [1, 2, 3];
+        //const b5 = a5.map((n) => n);//(n)=>n == (n)=>{return n}; 리턴 가능
+        //const b5 = [...a5] 와 같다
+        //기능은 spread와 같지만 값 하나하나를 수정할 수 있다. 반복문
+        const b5 = a5.map((n) => n + 10);
+        console.log(`a5의 값은:${a5}`);
+        console.log(`b5의 값은:${b5}`);
+    </script>
+</body>
+
+</html>
