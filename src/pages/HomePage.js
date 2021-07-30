@@ -11,6 +11,7 @@ import Header from '../components/Header';
 const HomePage = () => {
   //서버가 없음으로 임의사용
   const [boards, setBoards] = useState([]);
+  const [user, setUser] = useState({});
 
   //빈배열로 하여 최초 1회 실행
   useEffect(() => {
@@ -21,13 +22,13 @@ const HomePage = () => {
       { id: 3, title: '제목3', content: '내용3' },
     ];
     setBoards([...data]);
+    setUser({ id: 1, username: 'ssar' });
   }, []);
   //이렇게 넘어가는걸 props 라고한다
   return (
     <div>
       <Header />
-
-      <Home boards={boards} setBoards={setBoards} />
+      <Home boards={boards} setBoards={setBoards} user={user} />
       <Footer />
     </div>
   );
