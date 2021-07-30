@@ -1,38 +1,47 @@
-import { useEffect, useState } from 'react';
+import { useMemo, useState } from 'react';
 import './App.css';
 
 function App() {
-  const [data, setData] = useState(0);
-  const [search, setSearch] = useState(0);
-  const download = () => {
-    //  다운로드 받고(통신을 통해)
-    let downloadData = 5; //가정
-    setData(downloadData);
+  const [list, setList] = useState([1, 2, 3, 4]);
+  const [str, setStr] = useState('합계');
+
+  const getAddResult = () => {
+    let sum = 0;
+    list.forEach((i) => (sum = sum + i));
+    console.log('sum :', sum);
+    return sum;
   };
-  //실행시점 1. app함수가 최초 실행시(마운트 될 때)->그림이 그려질때
-  //2. 상태변수가 변경될 때
-  //의존관계 리스트를 관리할 수 있다.
-  useEffect(() => {
-    console.log('UseEffect 실행됨');
-    download();
-  }, [search]); //두번째 list 목록은 의존하는 객체들로 해당 객체 변경시 동작한다. 빈 배열인 경우 최초실행시에만 동작하도록 할 수 있다.
+
+  //연산 후 동일값이 사용될경우 재사용할 때 사용.
+  //처음인자는 어떤 함수에 메모할지 지정
+  //2번째 인자는 언제 실행할지 (dependency list)
+  const addResult = useMemo(() => getAddResult(), [list]);
+
   return (
     <div>
       <button
         onClick={() => {
-          setSearch(search + 1);
+          setList([...list, 10]);
         }}
       >
-        검색
+        값추가
       </button>
-      <h1> 데이터 : {data}</h1>
+
       <button
         onClick={() => {
-          setData(data + 1);
+          setStr('안녕');
         }}
       >
-        더하기
+        문자변경
       </button>
+      <div>
+        {list.map((i) => (
+          <h1>{i}</h1>
+        ))}
+      </div>
+      <div>
+        {str} : {addResult}
+      </div>
     </div>
   );
 }
