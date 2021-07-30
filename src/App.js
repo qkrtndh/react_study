@@ -1,47 +1,33 @@
-import { useMemo, useState } from 'react';
+import { createRef, useRef, useState } from 'react';
 import './App.css';
 
 function App() {
-  const [list, setList] = useState([1, 2, 3, 4]);
-  const [str, setStr] = useState('합계');
+  //useRef는 dom(태그)을 변경할 때 사용
+  //스타일을 저장하는 객체, 동적으로 바꿀 때 사용한다,.
+  const myRef = useRef(null);
 
-  const getAddResult = () => {
-    let sum = 0;
-    list.forEach((i) => (sum = sum + i));
-    console.log('sum :', sum);
-    return sum;
-  };
+  const [list, setList] = useState([
+    { id: 1, name: '홍길동' },
+    { id: 2, name: '고길동' },
+  ]);
 
-  //연산 후 동일값이 사용될경우 재사용할 때 사용.
-  //처음인자는 어떤 함수에 메모할지 지정
-  //2번째 인자는 언제 실행할지 (dependency list)
-  const addResult = useMemo(() => getAddResult(), [list]);
+  const myRefs = Array.from({ length: list.length }).map(() => createRef());
 
   return (
     <div>
       <button
         onClick={() => {
-          setList([...list, 10]);
+          myRef.current.style.backgroundColor = 'red';
+          myRefs[0].current.style.backgroundColor = 'green';
+          myRefs[1].current.style.backgroundColor = 'blue';
         }}
       >
-        값추가
+        버튼
       </button>
-
-      <button
-        onClick={() => {
-          setStr('안녕');
-        }}
-      >
-        문자변경
-      </button>
-      <div>
-        {list.map((i) => (
-          <h1>{i}</h1>
-        ))}
-      </div>
-      <div>
-        {str} : {addResult}
-      </div>
+      <div ref={myRef}>박스</div>
+      {list.map((user, index) => (
+        <h1 ref={myRefs[index]}>{user.name}</h1>
+      ))}
     </div>
   );
 }
