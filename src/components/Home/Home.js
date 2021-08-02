@@ -1,3 +1,4 @@
+import { Button } from 'react-bootstrap';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -6,6 +7,11 @@ import styled from 'styled-components';
 
 let StyledDeleteButton = styled.button`
   color: ${(props) => (props.user.username === 'ssar' ? 'blue' : 'red')};
+`;
+
+let StyledAddButton = styled(StyledDeleteButton)`
+  color: ${(props) => (props.user.username === 'ssar' ? 'blue' : 'red')};
+  background-color: green;
 `;
 
 //부모로부터 받아온 어떤 데이터를 가지고 스타일링을 동적으로 한다면
@@ -21,11 +27,13 @@ const Home = (props) => {
   return (
     <div>
       <h1>홈</h1>
+      <Button variant="primary">Primary</Button>
+      <StyledAddButton user={user}>더하기</StyledAddButton>
       <StyledDeleteButton user={user} onClick={() => setBoards([])}>
         전체삭제
       </StyledDeleteButton>
       {boards.map((board) => (
-        <h3>
+        <h3 key={board.id}>
           제목 : {board.title}, 내용 : {board.content}
         </h3>
       ))}

@@ -25,13 +25,7 @@ const HomePage = () => {
     setUser({ id: 1, username: 'ssar' });
   }, []);
   //이렇게 넘어가는걸 props 라고한다
-  return (
-    <div>
-      <Header />
-      <Home boards={boards} setBoards={setBoards} user={user} />
-      <Footer />
-    </div>
-  );
+  return <Home boards={boards} setBoards={setBoards} user={user} />;
 };
 
 export default HomePage;
