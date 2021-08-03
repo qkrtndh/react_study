@@ -27,16 +27,14 @@ const ListPage = () => {
     content: '',
   });
 
-  const handleWrite = () => {
-    setPosts([...posts, post]);
+  const handleWrite = (e) => {
+    e.preventDefault();
     setNo(no + 1);
-  };
 
-  const handleChangeTitle = (e) => {
-    setPost({ title: e.target.value });
-  };
-  const handleChangeContent = (e) => {
-    setPost({ content: e.target.value });
+    const a = { id: no };
+
+    setPost({ ...post, ...a });
+    setPosts([...posts, post]);
   };
 
   const handleForm = (e) => {
@@ -46,7 +44,7 @@ const ListPage = () => {
   return (
     <div>
       <h1>리스트페이지</h1>
-      <form>
+      <form onSubmit={handleWrite}>
         <input
           type="text"
           placeholder="제목"
@@ -61,9 +59,7 @@ const ListPage = () => {
           onChange={handleForm}
           name="content"
         />
-        <button type="button" onClick={handleWrite}>
-          글쓰기
-        </button>
+        <button type="submit">글쓰기</button>
       </form>
       <hr />
       {posts.map((post) => (

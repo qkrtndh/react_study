@@ -1,13 +1,14 @@
-import { Route } from 'react-router-dom';
+import React, { useState } from 'react';
 import './App.css';
-import Navigation from './components/Navigation';
-import ListPage from './pages/ListPage';
-import WritePage from './pages/WritePage';
+import Top from './components/Top';
+import Bottom from './components/Bottom';
 
 function App() {
   return (
-    <div>
-      <ListPage />
+    <div className="container">
+      <h1>최상단</h1>
+      <Top />
+      <Bottom />
     </div>
   );
 }
